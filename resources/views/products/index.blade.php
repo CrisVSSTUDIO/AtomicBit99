@@ -12,7 +12,7 @@
             <x-splade-flash>
                 <p v-if="flash.has('message')" v-text="flash.message" />
             </x-splade-flash>
-            <x-header-section title="Your assets">
+            <x-header-section title="My files">
                 {{-- <a href="{{ route('naive-bayes') }}"
                     class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     rel="nofollow">

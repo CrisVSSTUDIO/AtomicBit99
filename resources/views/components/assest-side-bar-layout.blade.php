@@ -1,11 +1,11 @@
 <div class="flex flex-col md:flex-row h-fit sm:h-screen">
-    <nav class=" top-0 left-0 h-1/6 md:h-screen space-y-8 sm:w-80 border-r bg-sky-50 ">
+    <nav class=" top-0 left-0 h-1/6 sm:w-2/12 md:h-screen space-y-8  border-r bg-sky-50 ">
         <div class="flex flex-col p-4">
 
                 <div class="flex flex-wrap justify-start  p-2">
 
 
-                    <span class="block text-gray-800 font-bold text-lg">AssetVault®</span>
+                    <span class="block text-gray-800 font-bold text-lg">{{ config('app.name', 'Laravel') }}</span>
 
                 </div>
 
@@ -76,7 +76,7 @@
                     
                         <li>
                             
-                            <Link modal a href="{{ route('settings') }}" modal
+                            <Link  a href="{{ route('settings') }}" modal
                                 class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                                 rel="nofollow">  <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -94,6 +94,6 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="flex-1 w:5/6 overflow-x-auto"> {{ $slot }}
+    <div class="flex-1 w:10/12 overflow-x-auto"> {{ $slot }}
     </div>
 </div>

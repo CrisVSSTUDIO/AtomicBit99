@@ -107,7 +107,7 @@ class Assets extends AbstractTable
             // )
             ->withGlobalSearch(columns: ['name'])
             ->export()
-            ->paginate()
+            ->paginate(8)
             ->hidePaginationWhenResourceContainsOnePage();
     }
 }
