@@ -6514,9 +6514,9 @@ ${codeFrame}` : message);
     };
     const LineChart = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender$1]]);
     const _sfc_main$1 = {
-      props: ["potatoKeys", "potatoValues"],
+      props: ["clusterKeys", "clusterValues"],
       mounted() {
-        console.log(this.potatoKeys, this.potatoValues[0]);
+        console.log(this.clusterKeys, this.clusterValues[0]);
         this.createChart();
       },
       methods: {
@@ -6528,32 +6528,32 @@ ${codeFrame}` : message);
             },
             series: [
               {
-                name: this.potatoKeys[0],
-                data: this.potatoValues[0]
+                name: this.clusterKeys[0],
+                data: this.clusterValues[0]
               },
               {
-                name: this.potatoKeys[1],
-                data: this.potatoValues[1]
+                name: this.clusterKeys[1],
+                data: this.clusterValues[1]
               },
               {
-                name: this.potatoKeys[2],
-                data: this.potatoValues[2]
+                name: this.clusterKeys[2],
+                data: this.clusterValues[2]
               },
               {
-                name: this.potatoKeys[3],
-                data: this.potatoValues[3]
+                name: this.clusterKeys[3],
+                data: this.clusterValues[3]
               },
               {
-                name: this.potatoKeys[4],
-                data: this.potatoValues[4]
+                name: this.clusterKeys[4],
+                data: this.clusterValues[4]
               },
               {
-                name: this.potatoKeys[5],
-                data: this.potatoValues[5]
+                name: this.clusterKeys[5],
+                data: this.clusterValues[5]
               },
               {
-                name: this.potatoKeys[6],
-                data: this.potatoValues[6]
+                name: this.clusterKeys[6],
+                data: this.clusterValues[6]
               }
             ],
             xaxis: {

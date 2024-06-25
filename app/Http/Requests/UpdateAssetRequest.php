@@ -30,7 +30,9 @@ class UpdateAssetRequest extends FormRequest
             'description' => 'sometimes',
             'upload' => 'nullable|file|mimetypes:image/jpeg,image/png,image/gif,image/svg+xml
             ,gltf,application/vnd.rar,image/webp,image/avif
-            ,application/pdf,model/gltf-binary,application/octet-stream,application/x-zip-compressed,text/csv,application/wavefront-obj',
+            ,application/pdf,model/gltf-binary,application/octet-stream, application/zip, 
+                  application/x-zip, 
+                  application/x-zip-compressed,text/csv,application/wavefront-obj',
          /*    'tags' => 'sometimes|max:4|unique:asset_tag,tag_id,NULL,id,asset_id,' . $this->id, */
 
 

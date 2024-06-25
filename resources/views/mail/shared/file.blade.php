@@ -1,12 +1,12 @@
 <x-mail::message>
-# Introduction
+    # Introduction
 
-The body of your message.
+    The user {{ $user }},
+    Has shared with the file, {{ $assetName }}
+    <x-mail::button :url="'http://127.0.0.1:8000/pt/asset-manager/assets/shared-assets/'">
+        Check file
+    </x-mail::button>
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
-
-Thanks,<br>
-{{ config('app.name') }}
+    Thanks,
+    {{ config('app.name') }}
 </x-mail::message>

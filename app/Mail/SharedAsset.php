@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SharedAsset extends Mailable
@@ -20,7 +21,8 @@ class SharedAsset extends Mailable
      */
     public function __construct(
         protected Asset $asset,
-    ) {}
+    ) {
+    }
 
     /**
      * Get the message envelope.
@@ -40,8 +42,9 @@ class SharedAsset extends Mailable
         return new Content(
             markdown: 'mail.shared.file',
             with: [
-                'assetName' => $this->asset->name,
-                'User' => Auth::user()->name,
+                'assetSlug' => $this->asset->slug,
+                'user' => Auth::user()->name,
+                'assetName'=>$this->asset->name
             ],
         );
     }
@@ -53,6 +56,6 @@ class SharedAsset extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [Attachment::fromStorageDisk('',$this->asset->upload)];
     }
 }

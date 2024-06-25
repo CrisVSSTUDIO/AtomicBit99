@@ -49,7 +49,8 @@ Route::middleware('splade')->group(function () {
             Route::get('/', function () {
                 return view('welcome');
             })->name('home');
-    
+            require __DIR__ . '/auth.php';
+
             Route::middleware('auth')->group(function () {
 
                 Route::get('super-admin', [AdminController::class, 'index'])->name('super-auth');
@@ -100,7 +101,5 @@ Route::middleware('splade')->group(function () {
                     Route::resource('assets', AssetController::class);
                 });
             });
-
-            require __DIR__ . '/auth.php';
         });
 });
