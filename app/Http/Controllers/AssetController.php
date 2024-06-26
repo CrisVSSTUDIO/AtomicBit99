@@ -84,7 +84,6 @@ class AssetController extends Controller
     public function store(StoreAssetRequest $request)
     {
         // Assuming 'upload' is a required field and validated by StoreAssetRequest
-        dd($request);
         collect($request->file('upload'))->each(function ($file) use ($request) {
             $path = $file->store();
             Asset::create([
