@@ -87,7 +87,7 @@ class AssetController extends Controller
         collect($request->file('upload'))->each(function ($file) use ($request) {
             $path = $file->store();
             Asset::create([
-                'name' => $file->getClientOriginalName(),
+                'name' =>  Str::take($file->getClientOriginalName(), 16),
                 'description' => $request->description ?? '-',
                 'filesize' => round($file->getSize() / 1048576, 2), // Convert bytes to megabytes
                 'filetype' => $file->extension(),
@@ -144,7 +144,7 @@ class AssetController extends Controller
             'user_id' => Auth::id(),
             'upload' => $request->hasFile('upload') ? $request->file('upload')->store() : $asset->upload,
             'filetype' => $request->hasFile('upload') ? $request->file('upload')->extension() : $asset->filetype,
-            'filesize' => round( $request->hasFile('upload') ? $request->file('upload')->getSize() : $asset->filetype / 1048576, 2), // Convert bytes to megabytes
+            'filesize' => round($request->hasFile('upload') ? $request->file('upload')->getSize() : $asset->filetype / 1048576, 2), // Convert bytes to megabytes
 
         ]);
         Toast::title('Asset updated!')->autoDismiss(8);
@@ -210,7 +210,7 @@ class AssetController extends Controller
         $asset->delete();
         Toast::title('Asset sent to the recycle center!')->autoDismiss(8);
 
-        return back();
+        return redirect('assets.index');
     }
     public function downloadFile(Asset $asset)
     {
@@ -232,8 +232,8 @@ class AssetController extends Controller
     {
         $asset->users()->sync($request->users);
         //get user emails
-        $userEmails=User::whereIn('id',$request->users)->pluck('email');
-        Mail::to($userEmails )->send(new SharedAsset($asset));
+        $userEmails = User::whereIn('id', $request->users)->pluck('email');
+        Mail::to($userEmails)->send(new SharedAsset($asset));
         Toast::title('Shared with success!')->autoDismiss(8);
 
         return back();
@@ -287,7 +287,8 @@ class AssetController extends Controller
         } catch (\Exception $e) {
 
             Toast::warning($e)->autoDismiss(8);
-            return back();        }
+            return back();
+        }
         /*         return ['accuracy' => $accuracy, 'predictions' => $predictions];
  */
     }
@@ -424,4 +425,3 @@ class AssetController extends Controller
         ]);
     }
 }
-
