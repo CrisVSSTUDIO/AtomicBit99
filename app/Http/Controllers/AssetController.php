@@ -143,11 +143,13 @@ class AssetController extends Controller
             'slug' => Str::slug($request->get('name')),
             'user_id' => Auth::id(),
             'upload' => $request->hasFile('upload') ? $request->file('upload')->store() : $asset->upload,
-            'filetype' => $request->hasFile('upload') ? $request->file('upload')->extension() : $asset->filetype
+            'filetype' => $request->hasFile('upload') ? $request->file('upload')->extension() : $asset->filetype,
+            'filesize' => round( $request->hasFile('upload') ? $request->file('upload')->getSize() : $asset->filetype / 1048576, 2), // Convert bytes to megabytes
+
         ]);
         Toast::title('Asset updated!')->autoDismiss(8);
 
-        return redirect()->route('assets.index');
+        return back();
     }
     public function patterns()
     {
@@ -422,3 +424,4 @@ class AssetController extends Controller
         ]);
     }
 }
+
