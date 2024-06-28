@@ -26,8 +26,8 @@ class AssetSeeder extends Seeder
                 'filetype' => 'jpeg',
                 'filesize' => 0.000342,
                 'user_id' => 1,
-                'created_at' => Carbon::parse('2028-01-01'),
-                'updated_at' => Carbon::parse('2028-01-01'),
+                'created_at' => Carbon::parse('2026-01-01'),
+                'updated_at' => Carbon::parse('2026-01-01'),
                 'deleted_at'=>NULL
             ]);
         }

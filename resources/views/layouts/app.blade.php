@@ -11,8 +11,8 @@
 
     <!-- Page Content -->
     <main>
-        <div id="app" 
-           class="bg-zinc-50 ">
+        <div id="app"
+           class="bg-zinc-50 z-10">
             {{ $slot }}
         </div>
     </main>

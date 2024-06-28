@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use ProtoneMedia\Splade\Facades\SEO;
+use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -16,6 +17,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        SEO::title('Login page')
+            ->description('The login page to authenticate!')
+            ->keywords('login, auth');
+
         return view('auth.login');
     }
 
