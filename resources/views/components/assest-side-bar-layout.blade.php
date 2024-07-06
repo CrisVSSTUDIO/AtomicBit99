@@ -1,17 +1,17 @@
-<div class="flex flex-col md:flex-row h-fit sm:h-screen">
+<div class="flex flex-col md:flex-row h-fit sm:h-full">
     <nav class=" top-0 left-0 h-1/6 sm:w-2/12 md:h-screen space-y-8  border-r bg-sky-50 ">
         <div class="flex flex-col p-4">
 
             <div class="flex flex-wrap justify-start  p-2">
 
 
-                <span class="block text-gray-800 font-bold text-lg">{{ config('app.name', 'Laravel') }}</span>
+                <span class="block text-gray-800 font-bold text-lg">Management panel</span>
 
             </div>
 
             <ul class="text-sm font-medium flex-1 mt-2">
                 <li><a href="{{ route('assets.index') }}"
-                        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                         rel="nofollow">
                         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -21,7 +21,7 @@
                             </svg></div>All assets
                     </a></li>
                 <li><a href="{{ route('naive-bayes') }}"
-                        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                         rel="nofollow">
                         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-signpost-split" viewBox="0 0 16 16">
@@ -30,7 +30,7 @@
                             </svg></div>Classify assets
                     </a></li>
                 <li><a href="{{ route('assets-analytics') }}"
-                        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                         rel="nofollow">
                         <div class="text-gray-500">
 
@@ -42,7 +42,7 @@
                         </div>Asset analytics
                     </a></li>
                 {{-- <li><a href="{{ route('assets-card-view') }}"
-                            class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                            class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                             rel="nofollow">
                             <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -52,7 +52,7 @@
                                 </svg></div>Card view
                         </a></li> --}}
                 <li><a href="{{ route('shared-assets') }}"
-                        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                         rel="nofollow">
                         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
@@ -61,7 +61,7 @@
                             </svg></div>Shared with me
                     </a></li>
                 <li><a href="{{ route('trashed') }}"
-                        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                         rel="nofollow">
                         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-recycle" viewBox="0 0 16 16">
@@ -77,7 +77,7 @@
                     <li>
 
                         <Link a href="{{ route('settings') }}" modal
-                            class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                            class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                             rel="nofollow">
                         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -95,7 +95,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="flex-1 w:10/12 overflow-x-auto"> {{ $slot }}
+    <div class="flex-1 w:10/12  m-2"> {{ $slot }}
     </div>
 </div>
 
@@ -106,7 +106,7 @@
     class=" bg-teal-100 py-1.5 px-2.5 rounded-lg gap-x-3 overflow-x-auto text-sm flex flex-wrap justify-center"
     aria-label="Manage your account" tabindex="0" data-orientation="horizontal" style="outline: none;">
     <a href="{{ route('assets.index') }}"
-        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
         rel="nofollow">
         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -117,7 +117,7 @@
     </a>
 
     <a href="{{ route('naive-bayes') }}"
-        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
         rel="nofollow">
         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                 fill="currentColor" class="bi bi-signpost-split" viewBox="0 0 16 16">
@@ -127,7 +127,7 @@
     </a>
 
     <a href="{{ route('assets-analytics') }}"
-        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
         rel="nofollow">
         <div class="text-gray-500">
 
@@ -140,7 +140,7 @@
     </a>
 
     {{-- <a href="{{ route('assets-card-view') }}"
-                    class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                    class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     rel="nofollow">
                     <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -150,7 +150,7 @@
                         </svg></div>Card view
                 </a>
     <a href="{{ route('shared-assets') }}"
-        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
         rel="nofollow">
         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                 fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
@@ -160,7 +160,7 @@
     </a>
 
     <a href="{{ route('trashed') }}"
-        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+        class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
         rel="nofollow">
         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                 fill="currentColor" class="bi bi-recycle" viewBox="0 0 16 16">
@@ -175,7 +175,7 @@
 
 
         <Link a href="{{ route('settings') }}" modal
-            class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+            class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
             rel="nofollow">
         <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">

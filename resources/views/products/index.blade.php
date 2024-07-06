@@ -24,7 +24,7 @@
                 </a> --}}
                 <x-splade-form blob action="{{ route('download-all') }}" method="get" confirm="Download all files?"
                     confirm-text="Are you sure you want to download ALL of your files?"
-                    confirm-button="Yes, event though it will take a massive load!" cancel-button="No, I'm scared!">
+                    confirm-button="Yes, even though it will take a massive load!" cancel-button="No, I'm scared!">
                     @csrf
                     {{-- <p v-if="form.processing">Submitting the data...</p> --}}
                     <button type="submit"
@@ -57,11 +57,10 @@
                                 @case($filextension == 'glb')
                                     <model-viewer alt="{{ $item->name ?? 'Sem nome' }}"
                                         src="{{ asset('storage/' . $item->upload) }}" ar camera-controls touch-action="pan-y"
-                                        loading="lazy"
-                                        class="h-24 w-24
-                            
-                            
-                            
+                                        loading="lazy" class="h-24 w-24
+
+
+
                             "></model-viewer>
                                 @break
 
@@ -76,12 +75,8 @@
                                 @break
 
                                 @case($filextension == 'pdf')
-                                    <link rel="import" src="{{ asset('storage/' . $item->upload) }}"
-                                        title="{{ $item->name ?? 'Sem nome' }}"
-                                        class="w-24 h-auto
-                                                    
-                            
-                            ">
+                                    <iframe src="{{ asset('storage/' . $item->upload) }}"
+                                        title="{{ $item->name ?? 'Sem nome' }}" class="w-24 h-auto"></iframe>
                                 @break
 
                                 @case($filextension == 'csv')
@@ -94,11 +89,10 @@
 
                                 @default
                                     <img src="{{ asset('storage/' . $item->upload) }}" alt="{{ $item->name ?? 'Sem nome' }}"
-                                        loading="lazy"
-                                        class="w-24 h-auto
-                            
-                            
-                            
+                                        loading="lazy" class="w-24 h-auto
+
+
+
                             " />
                             @endswitch
                         @endif
