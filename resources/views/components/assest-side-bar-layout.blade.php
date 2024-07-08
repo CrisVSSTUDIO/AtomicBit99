@@ -5,7 +5,7 @@
             <div class="flex flex-wrap justify-start  p-2">
 
 
-                <span class="block text-gray-800 font-bold text-lg">Management panel</span>
+                <span class="block text-gray-800 font-bold text-lg"></span>
 
             </div>
 
