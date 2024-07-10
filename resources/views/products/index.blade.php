@@ -1,5 +1,4 @@
 <x-app-layout>
-    <x-assest-side-bar-layout>
         <section class="assets ">
 
             <!-- Your content here -->
@@ -121,5 +120,4 @@
             </div>
 
         </section>
-    </x-assest-side-bar-layout>
 </x-app-layout>

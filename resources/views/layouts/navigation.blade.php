@@ -1,6 +1,6 @@
 <x-splade-toggle>
 
-    <nav class="shadow-lg relative z-10 bg-zinc-50 dark:bg-gray-900">
+    <nav class="shadow-lg relative z-10 bg-white dark:bg-gray-900">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -17,17 +17,22 @@
                         <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-
+                        <x-nav-link confirm :href="route('naive-bayes')" :active="request()->routeIs('naive-bayes')">
+                            {{ __('Classify files') }}
+                        </x-nav-link>
                         {{-- <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                             {{ __('Assets') }}
+                        </x-nav-link> --}}
+                        <x-nav-link :href="route('shared-assets')" :active="request()->routeIs('shared-assets')">
+                            {{ __('Shared with me') }}
                         </x-nav-link>
                         <x-nav-link :href="route('trashed')" :active="request()->routeIs('trashed')">
                             {{ __('Trashed') }}
-                        </x-nav-link> --}}
+                        </x-nav-link>
 
-                        {{--    <x-nav-link :href="route('analytics')" :active="request()->routeIs('analytics')">
-                            {{ __('Analytics') }}
-                        </x-nav-link> --}}
+                        <x-nav-link :href="route('assets-analytics')" :active="request()->routeIs('assets-analytics')">
+                            {{ __('File analytics') }}
+                        </x-nav-link>
 
                     </div>
                 </div>
@@ -69,6 +74,10 @@
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
+                            <x-dropdown-link :href="route('settings')" modal>
+                                {{ __('Settings') }}
+                            </x-dropdown-link>
+
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -94,16 +103,22 @@
                 <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link confirm :href="route('naive-bayes')" :active="request()->routeIs('naive-bayes')">
+                    {{ __('Classify file') }}
+                </x-responsive-nav-link>
                 {{-- <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                     {{ __('Assets') }}
+                </x-responsive-nav-link> --}}
+                <x-responsive-nav-link :href="route('shared-assets')" :active="request()->routeIs('shared-assets')">
+                    {{ __('Shared with me') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('trashed')">
                     {{ __('Trashed') }}
-                </x-responsive-nav-link> --}}
+                </x-responsive-nav-link>
 
-                {{--    <x-responsive-nav-link :href="route('analytics')" :active="request()->routeIs('analytics')">
-                    {{ __('Analytics') }}
-                </x-responsive-nav-link> --}}
+                <x-responsive-nav-link :href="route('assets-analytics')" :active="request()->routeIs('assets-analytics')">
+                    {{ __('File analytics') }}
+                </x-responsive-nav-link>
                 <x-responsive-nav-link>
                     <x-language-switcher />
                 </x-responsive-nav-link>
@@ -130,6 +145,10 @@
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>
+                    <hr>
+                    <x-responsive-nav-link :href="route('settings')" modal>
+                        {{ __('Settings') }}
+                    </x-responsive-nav-link>
                 </div>
             </div>
         </div>

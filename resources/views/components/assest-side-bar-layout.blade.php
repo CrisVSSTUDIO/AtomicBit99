@@ -1,15 +1,15 @@
 <div class="flex flex-col md:flex-row h-fit sm:h-full">
-    <nav class=" top-0 left-0 h-1/6 sm:w-2/12 md:h-screen space-y-8  border-r bg-sky-50 ">
+    <nav class=" top-0 left-0 h-1/6 sm:w-2/12 md:h-screen space-y-8  bg-white h-full border-r ">
         <div class="flex flex-col p-4">
 
             <div class="flex flex-wrap justify-start  p-2">
 
 
-                <span class="block text-gray-800 font-bold text-lg"></span>
+                <span class="block text-gray-800 font-bold text-lg">Asset Managment</span>
 
             </div>
 
-            <ul class="text-sm font-medium flex-1 mt-2">
+            <ul class="text-sm font-medium flex-1 mt-2  ">
                 <li><a href="{{ route('assets.index') }}"
                         class="flex items-center gap-x-2 text-gray-950 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                         rel="nofollow">

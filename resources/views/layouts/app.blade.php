@@ -1,4 +1,4 @@
-<div class="min-h-screen ">
+<div class="min-h-screen bg-zinc-50">
     @include('layouts.navigation')
 
     @hasSection('header')
@@ -12,7 +12,7 @@
     <!-- Page Content -->
     <main>
         <div id="app"
-           class="bg-zinc-50 z-10">
+           class="max-w-screen  mx-auto z-10">
             {{ $slot }}
         </div>
     </main>

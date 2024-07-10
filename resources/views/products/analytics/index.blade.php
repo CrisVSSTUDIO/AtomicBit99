@@ -1,8 +1,7 @@
 <x-app-layout>
-    <x-assest-side-bar-layout>
 
         <x-header-section title=" Analytics" >
-          
+
         </x-header-section>
         <div class=" mx-auto px-4">
             <div class="flex flex-wrap flex-col md:grid gap-4 grid-cols-2 ">
@@ -39,11 +38,10 @@
                         </LineChart>
                     </x-card-generic>
                 </div>
-               
+
             </div>
 
         </div>
 
 
-    </x-assest-side-bar-layout>
 </x-app-layout>

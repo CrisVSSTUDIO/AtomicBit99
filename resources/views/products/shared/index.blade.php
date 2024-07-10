@@ -1,5 +1,4 @@
 <x-app-layout>
-    <x-assest-side-bar-layout>
 
         <section class="assets ">
             <x-header-section title="Shared with you">
@@ -32,9 +31,9 @@
                                         src="{{ asset('storage/' . $item->upload) }}" ar camera-controls touch-action="pan-y"
                                         loading="lazy"
                                         class="h-24 w-24
-                            
-                            
-                            
+
+
+
                             "></model-viewer>
                                 @break
 
@@ -52,8 +51,8 @@
                                     <link rel="import" src="{{ asset('storage/' . $item->upload) }}"
                                         title="{{ $item->name ?? 'Sem nome' }}"
                                         class="w-24 h-auto
-                                                    
-                            
+
+
                             ">
                                 @break
 
@@ -69,9 +68,9 @@
                                     <img src="{{ asset('storage/' . $item->upload) }}" alt="{{ $item->name ?? 'Sem nome' }}"
                                         loading="lazy"
                                         class="w-24 h-auto
-                            
-                            
-                            
+
+
+
                             " />
                             @endswitch
                         @endif
@@ -87,10 +86,9 @@
 
                 </x-splade-table>
             </div>
-      
+
         </section>
 
-    </x-assest-side-bar-layout>
 
 
 
