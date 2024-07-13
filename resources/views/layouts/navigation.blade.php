@@ -1,6 +1,6 @@
 <x-splade-toggle>
 
-    <nav class="shadow-lg relative z-10 bg-white dark:bg-gray-900">
+    <nav class="shadow-lg relative z-10 bg-white ">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -15,7 +15,7 @@
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
-                            {{ __('Dashboard') }}
+                            {{ __('My files') }}
                         </x-nav-link>
                         <x-nav-link confirm :href="route('naive-bayes')" :active="request()->routeIs('naive-bayes')">
                             {{ __('Classify files') }}
@@ -101,10 +101,10 @@
         <div v-bind:class="{ block: toggled, hidden: !toggled }" class="sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
-                    {{ __('Dashboard') }}
+                    {{ __('My files') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link confirm :href="route('naive-bayes')" :active="request()->routeIs('naive-bayes')">
-                    {{ __('Classify file') }}
+                    {{ __('Classify files') }}
                 </x-responsive-nav-link>
                 {{-- <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                     {{ __('Assets') }}

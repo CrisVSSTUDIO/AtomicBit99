@@ -23,7 +23,7 @@
                         class="flex-1 gap-x-6 hidden items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
                         @auth
                             <a href="{{ route('assets.index') }}" class="block text-gray-700 hover:text-gray-900"
-                                rel="nofollow">Dashboard</a>
+                                rel="nofollow">My files</a>
                         @else
                             <a href="{{ route('login') }}" class="block text-gray-700 hover:text-gray-900"
                                 rel="nofollow">Log in</a>
@@ -72,7 +72,7 @@
                     @if (Route::has('login'))
 
                         @auth
-                            <x-responsive-nav-link href="{{ route('assets.index') }}">Dashboard</x-responsive-nav-link>
+                            <x-responsive-nav-link href="{{ route('assets.index') }}">My files</x-responsive-nav-link>
                         @else
                             <x-responsive-nav-link href="{{ route('login') }}">Log in </x-responsive-nav-link>
 
