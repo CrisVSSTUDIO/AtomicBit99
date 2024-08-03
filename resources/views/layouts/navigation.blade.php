@@ -17,9 +17,7 @@
                         <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                             {{ __('My files') }}
                         </x-nav-link>
-                        <x-nav-link confirm :href="route('naive-bayes')" :active="request()->routeIs('naive-bayes')">
-                            {{ __('Classify files') }}
-                        </x-nav-link>
+
                         {{-- <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                             {{ __('Assets') }}
                         </x-nav-link> --}}
@@ -33,6 +31,10 @@
                         <x-nav-link :href="route('assets-analytics')" :active="request()->routeIs('assets-analytics')">
                             {{ __('File analytics') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('detect-images')" :active="request()->routeIs('detect-images')">
+                            {{ __('Detect images') }}
+                        </x-nav-link>
+
 
                     </div>
                 </div>
@@ -77,6 +79,9 @@
                             <x-dropdown-link :href="route('settings')" modal>
                                 {{ __('Settings') }}
                             </x-dropdown-link>
+                            <x-dropdown-link>
+                                <x-language-switcher />
+                            </x-dropdown-link>
 
                         </x-slot>
                     </x-dropdown>
@@ -103,9 +108,7 @@
                 <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                     {{ __('My files') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link confirm :href="route('naive-bayes')" :active="request()->routeIs('naive-bayes')">
-                    {{ __('Classify files') }}
-                </x-responsive-nav-link>
+
                 {{-- <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.index')">
                     {{ __('Assets') }}
                 </x-responsive-nav-link> --}}
@@ -118,6 +121,9 @@
 
                 <x-responsive-nav-link :href="route('assets-analytics')" :active="request()->routeIs('assets-analytics')">
                     {{ __('File analytics') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('detect-images')" :active="request()->routeIs('detect-images')">
+                    {{ __('Detect images') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link>
                     <x-language-switcher />

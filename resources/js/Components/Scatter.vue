@@ -17,8 +17,7 @@ export default {
 
     methods: {
         createChart() {
-/*             const chartData = this.potato;
- */            const chart = new ApexCharts(this.$refs.linechart, {
+          const chart = new ApexCharts(this.$refs.linechart, {
             chart: {
                 type: 'scatter',
                 height: 400,

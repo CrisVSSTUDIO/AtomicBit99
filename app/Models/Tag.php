@@ -10,8 +10,7 @@ class Tag extends Model
     use HasFactory;
     protected $fillable = [
         'tag_name',
-        'user_id
-        '
+        'user_id'
     ];
     public function assets()
     {

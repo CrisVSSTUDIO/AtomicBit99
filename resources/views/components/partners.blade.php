@@ -6,7 +6,7 @@
                     Tecnologies used
                 </h3>
                 <p class="text-gray-600 mt-3">
-                    The great tech stack that powers AssetVault!
+                    The great tech stack that powers {{config('app.name', 'Laravel') }}!
                 </p>
             </div>
             <div class="mt-12 flex justify-center">
@@ -28,11 +28,9 @@
                     </li>
 
                     <li>
-                    <li>
                         <Link away href="https://spatie.be/docs/laravel-permission/v6/introduction">Spatie (Laravel)
                         </Link>
 
-                    </li>
                     </li>
 
                     <li>
@@ -61,6 +59,10 @@
                   </li>
                   <li>
                     <Link away href="https://icons.getbootstrap.com/">Bootstrap Icons</Link>
+
+                  </li>
+                  <li>
+                    <Link away href="https://www.tensorflow.org/js?hl=en">Tensorflow (js)</Link>
 
                   </li>
 

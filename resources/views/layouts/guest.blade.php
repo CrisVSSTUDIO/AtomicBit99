@@ -4,4 +4,4 @@
     {{ $slot }}
     <x-footer />
 </div>
-<Particle/>
+<Particle />

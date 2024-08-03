@@ -6,18 +6,21 @@ import { createServer } from "http";
 import require$$0 from "@vue/compiler-dom";
 import require$$1 from "@vue/runtime-dom";
 import require$$2 from "@vue/shared";
-import { ssrRenderComponent, ssrRenderAttrs, ssrRenderAttr, ssrRenderList, ssrInterpolate, renderToString } from "@vue/server-renderer";
+import { ssrRenderComponent, ssrRenderAttrs, ssrRenderAttr, ssrRenderList, ssrInterpolate, ssrRenderVNode, renderToString } from "@vue/server-renderer";
 import ne from "axios";
 import VueApexCharts from "vue-apexcharts";
 import ApexCharts$1 from "apexcharts";
 import { AccordionRoot, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent } from "radix-vue";
 import "@google/model-viewer";
+import * as cocoSsd from "@tensorflow-models/coco-ssd";
+import "@tensorflow/tfjs-backend-webgl";
+import "@tensorflow/tfjs-backend-cpu";
 var require_ssr = __commonJS({
   "ssr.js"(exports, module) {
     var vue = { exports: {} };
     var vue_cjs_prod = {};
     /**
-    * vue v3.4.31
+    * vue v3.4.34
     * (c) 2018-present Yuxi (Evan) You and Vue contributors
     * @license MIT
     **/
@@ -94,7 +97,7 @@ var require_ssr = __commonJS({
     }
     var vue_cjs = {};
     /**
-    * vue v3.4.31
+    * vue v3.4.34
     * (c) 2018-present Yuxi (Evan) You and Vue contributors
     * @license MIT
     **/
@@ -3953,8 +3956,8 @@ ${codeFrame}` : message);
     }
     var ef = Qe(ve, "DataView");
     const Ir = ef;
-    var tf = Qe(ve, "Promise");
-    const Ar = tf;
+    var tf$1 = Qe(ve, "Promise");
+    const Ar = tf$1;
     var rf = Qe(ve, "Set");
     const Pr = rf;
     var nf = Qe(ve, "WeakMap");
@@ -6434,7 +6437,7 @@ ${codeFrame}` : message);
         }
       }).listen(i, () => console.log(`Splade SSR server started on port ${i}.`));
     }
-    const _sfc_main$3 = {
+    const _sfc_main$4 = {
       __name: "Particle",
       __ssrInlineRender: true,
       setup(__props) {
@@ -6451,11 +6454,11 @@ ${codeFrame}` : message);
         };
       }
     };
-    const _sfc_setup$3 = _sfc_main$3.setup;
-    _sfc_main$3.setup = (props, ctx) => {
+    const _sfc_setup$4 = _sfc_main$4.setup;
+    _sfc_main$4.setup = (props, ctx) => {
       const ssrContext = vueExports.useSSRContext();
       (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Particle.vue");
-      return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
+      return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
     };
     const _export_sfc = (sfc, props) => {
       const target = sfc.__vccOpts || sfc;
@@ -6464,7 +6467,7 @@ ${codeFrame}` : message);
       }
       return target;
     };
-    const _sfc_main$2 = {
+    const _sfc_main$3 = {
       props: ["yearCount", "perYear"],
       mounted() {
         this.createChart();
@@ -6506,14 +6509,14 @@ ${codeFrame}` : message);
     function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
       _push(`<div${ssrRenderAttrs(vueExports.mergeProps({ id: "app" }, _attrs))}><div id="chart"${ssrRenderAttr("perYear", $props.perYear)}${ssrRenderAttr("yearCount", $props.yearCount)}></div></div>`);
     }
-    const _sfc_setup$2 = _sfc_main$2.setup;
-    _sfc_main$2.setup = (props, ctx) => {
+    const _sfc_setup$3 = _sfc_main$3.setup;
+    _sfc_main$3.setup = (props, ctx) => {
       const ssrContext = vueExports.useSSRContext();
       (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/LineChart.vue");
-      return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
+      return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
     };
-    const LineChart = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender$1]]);
-    const _sfc_main$1 = {
+    const LineChart = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["ssrRender", _sfc_ssrRender$1]]);
+    const _sfc_main$2 = {
       props: ["clusterKeys", "clusterValues"],
       mounted() {
         console.log(this.clusterKeys, this.clusterValues[0]);
@@ -6603,14 +6606,14 @@ ${codeFrame}` : message);
     function _sfc_ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
       _push(`<div${ssrRenderAttrs(vueExports.mergeProps({ id: "app" }, _attrs))}><div id="chart"></div></div>`);
     }
-    const _sfc_setup$1 = _sfc_main$1.setup;
-    _sfc_main$1.setup = (props, ctx) => {
+    const _sfc_setup$2 = _sfc_main$2.setup;
+    _sfc_main$2.setup = (props, ctx) => {
       const ssrContext = vueExports.useSSRContext();
       (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Scatter.vue");
-      return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
+      return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
     };
-    const Scatter = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["ssrRender", _sfc_ssrRender]]);
-    const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
+    const Scatter = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender]]);
+    const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
       __name: "Accordion",
       __ssrInlineRender: true,
       setup(__props) {
@@ -6773,16 +6776,67 @@ ${codeFrame}` : message);
         };
       }
     });
+    const _sfc_setup$1 = _sfc_main$1.setup;
+    _sfc_main$1.setup = (props, ctx) => {
+      const ssrContext = vueExports.useSSRContext();
+      (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Accordion.vue");
+      return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
+    };
+    const _sfc_main = {
+      __name: "MLTest",
+      __ssrInlineRender: true,
+      props: {
+        imgFiles: Array
+      },
+      setup(__props) {
+        vueExports.ref(null);
+        const showBtn = vueExports.ref(false);
+        cocoSsd.load().then(function(loadedModel) {
+          showBtn.value = true;
+        });
+        return (_ctx, _push, _parent, _attrs) => {
+          _push(`<!--[-->`);
+          ssrRenderVNode(_push, vueExports.createVNode(vueExports.resolveDynamicComponent("style"), null, {
+            default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
+              if (_push2) {
+                _push2(` .classifyOnClick { position: relative; float: left; margin: 2% 1%; cursor: pointer; } .classifyOnClick p { position: absolute; padding: 5px; background-color: rgba(255, 111, 0, 0.85); color: #FFF; border: 1px dashed rgba(255, 255, 255, 0.7); z-index: 2; font-size: 12px; margin: 0; } .highlighter { background: rgba(0, 255, 0, 0.25); border: 1px dashed #fff; z-index: 1; position: absolute; } .classifyOnClick { z-index: 0; } `);
+              } else {
+                return [
+                  vueExports.createTextVNode(" .classifyOnClick { position: relative; float: left; margin: 2% 1%; cursor: pointer; } .classifyOnClick p { position: absolute; padding: 5px; background-color: rgba(255, 111, 0, 0.85); color: #FFF; border: 1px dashed rgba(255, 255, 255, 0.7); z-index: 2; font-size: 12px; margin: 0; } .highlighter { background: rgba(0, 255, 0, 0.25); border: 1px dashed #fff; z-index: 1; position: absolute; } .classifyOnClick { z-index: 0; } ")
+                ];
+              }
+            }),
+            _: 1
+          }), _parent);
+          _push(`<div id="app">`);
+          if (!showBtn.value) {
+            _push(`<div class="my-5"><div class="spinner-border spinner-border-sm" role="status"></div><span class=""> Loading...</span></div>`);
+          } else {
+            _push(`<!---->`);
+          }
+          if (showBtn.value) {
+            _push(`<section class="py-16"><div class="w-screen mx-auto px-4 md:px-8"><ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"><!--[-->`);
+            ssrRenderList(__props.imgFiles, (file) => {
+              _push(`<li class="classifyOnClick"><div class="flex items-start justify-between p-4"><div class="space-y-2"><img${ssrRenderAttr("src", "http://127.0.0.1:8000/storage/" + file.upload)} class="shadow-md"></div></div></li>`);
+            });
+            _push(`<!--]--></ul></div></section>`);
+          } else {
+            _push(`<!---->`);
+          }
+          _push(`</div><!--]-->`);
+        };
+      }
+    };
     const _sfc_setup = _sfc_main.setup;
     _sfc_main.setup = (props, ctx) => {
       const ssrContext = vueExports.useSSRContext();
-      (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/Accordion.vue");
+      (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("resources/js/Components/MLTest.vue");
       return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
     };
     kp(createServer, renderToString, (props) => {
       return vueExports.createSSRApp({
         render: Cp(props)
-      }).use(Fp, VueApexCharts).component("Particle", _sfc_main$3).component("LineChart", LineChart).component("Scatter", Scatter).component("Accordion", _sfc_main);
+      }).use(Fp, VueApexCharts, tf).component("Particle", _sfc_main$4).component("LineChart", LineChart).component("Scatter", Scatter).component("Accordion", _sfc_main$1).component("MLTest", _sfc_main);
     });
   }
 });

@@ -74,27 +74,23 @@ Route::middleware('splade')->group(function () {
                     Route::post('/change-prediction-settings', [SettingsController::class, 'setAssetPrediction'])->name('change-prediction-settings');
 
                     Route::prefix('assets')->group(function () {
-                        // Custom route to get all assets
-
                         // Custom route to download an asset by slug
+                        Route::get('/train-csv/{id}', [AssetController::class, 'trainCSV'])->name('train-csv');
                         Route::get('/download/{asset:slug}', [AssetController::class, 'downloadFile'])->name('download');
-
                         // Custom route to restore a soft-deleted asset
                         Route::post('/{id}/restore', [AssetController::class, 'restore'])->name('restore-asset');
                         Route::get('/share-page/{asset}', [AssetController::class, 'sharePage'])->name('assets.share-page');
-
                         Route::post('/share-files/{asset}', [AssetController::class, 'shareFiles'])->name('assets.share');
-
                         // Custom route to force delete an asset
                         Route::post('/{id}/forcedelete', [AssetController::class, 'forceDelete'])->name('delete-asset');
                         Route::get('/download-all', [AssetController::class, 'downloadAll'])->name('download-all');
-
                         // Custom route for Naive Bayes analysis (example)
                         Route::get('/naive-bayes', [AssetController::class, 'naiveBayes'])->name('naive-bayes');
                         Route::get('/assets-analytics', [AssetController::class, 'assetAnalytics'])->name('assets-analytics');
                         Route::get('/assets-card-view', [AssetController::class, 'assetsCardView'])->name('assets-card-view');
                         Route::get('/image-upscaler', [ImageUpscallerController::class, 'runPythonScript'])->name('image-upscaler');
                         Route::get('/shared-assets', [AssetController::class, 'sharedAssets'])->name('shared-assets');
+                        Route::get('/detect-images', [AssetController::class, 'tensorFlowImgPrediction'])->name('detect-images');
                         // Custom route to view trashed assets
                         Route::get('/trashed', [TrashedController::class, 'index'])->name('trashed');
                     });

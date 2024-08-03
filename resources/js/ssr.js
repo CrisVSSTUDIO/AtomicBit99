@@ -8,15 +8,19 @@ import VueApexCharts from 'vue-apexcharts'
 import Scatter from "./Components/Scatter.vue";
 import Accordion from "./Components/Accordion.vue";
 import '@google/model-viewer';
+import MLTest  from "./Components/MLTest.vue";
+
+import cocoSsd from '@tensorflow-models/coco-ssd';
 startServer(createServer, renderToString, (props) => {
     return createSSRApp({
         render: renderSpladeApp(props)
     })
-        .use(SpladePlugin, VueApexCharts)
+        .use(SpladePlugin, VueApexCharts,tf)
         .component('Particle', Particle)
         .component('LineChart', LineChart)
         .component('Scatter', Scatter)
         .component('Accordion', Accordion)
+        .component('MLTest', MLTest)
 
 
 });

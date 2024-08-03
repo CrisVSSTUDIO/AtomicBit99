@@ -13,6 +13,7 @@ use App\Models\Asset;
 use App\Tables\Assets;
 use Phpml\Math\Matrix;
 use App\Models\Category;
+use App\Mail\SharedAsset;
 use Phpml\Regression\SVR;
 use Chumper\Zipper\Zipper;
 use Phpml\Metric\Accuracy;
@@ -22,6 +23,7 @@ use Illuminate\Http\Request;
 use Phpml\Clustering\DBSCAN;
 use Phpml\Clustering\KMeans;
 use Phpml\Classification\SVC;
+use Phpml\Dataset\CsvDataset;
 use Illuminate\Testing\Assert;
 use Phpml\Math\Statistic\Mean;
 use Phpml\Dataset\ArrayDataset;
@@ -34,6 +36,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Phpml\Classification\NaiveBayes;
 use ProtoneMedia\Splade\SpladeTable;
+use Phpml\Tokenization\WordTokenizer;
 use Phpml\Metric\ClassificationReport;
 use Phpml\SupportVectorMachine\Kernel;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -43,7 +46,6 @@ use Phpml\FeatureSelection\SelectKBest;
 use App\Http\Requests\StoreAssetRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\UpdateAssetRequest;
-use App\Mail\SharedAsset;
 use Phpml\Classification\KNearestNeighbors;
 use Phpml\Tokenization\WhitespaceTokenizer;
 use Phpml\FeatureExtraction\TfIdfTransformer;
@@ -87,7 +89,7 @@ class AssetController extends Controller
         collect($request->file('upload'))->each(function ($file) use ($request) {
             $path = $file->store();
             Asset::create([
-                'name' =>  Str::take($file->getClientOriginalName(), 16),
+                'name' =>  $file->getClientOriginalName(),
                 'description' => $request->description ?? '-',
                 'filesize' => round($file->getSize() / 1048576, 2), // Convert bytes to megabytes
                 'filetype' => $file->extension(),
@@ -98,7 +100,7 @@ class AssetController extends Controller
             ]);
         });
 
-        Toast::title('Asset inserted!')->autoDismiss(8);
+        Toast::title('Asset uploaded!')->autoDismiss(8);
         return back();
     }
     /**
@@ -237,6 +239,39 @@ class AssetController extends Controller
         Toast::title('Shared with success!')->autoDismiss(8);
 
         return back();
+    }
+    public function trainCSV($id)
+    {
+        ini_set('memory_limit', '-1');
+
+        $csvFile = Asset::where('id', $id)->value('upload');
+        $dataset = new CsvDataset('storage/' . $csvFile, 1);
+        $vectorizer = new TokenCountVectorizer(new WordTokenizer());
+        $tfIdfTransformer = new TfIdfTransformer();
+
+        $samples = [];
+        foreach ($dataset->getSamples() as $sample) {
+            $samples[] = $sample[0];
+        }
+
+        $vectorizer->fit($samples);
+        $vectorizer->transform($samples);
+
+        $tfIdfTransformer->fit($samples);
+        $tfIdfTransformer->transform($samples);
+
+        $dataset = new ArrayDataset($samples, $dataset->getTargets());
+
+        $randomSplit = new StratifiedRandomSplit($dataset, 0.1);
+
+
+        $classifier = new SVC(Kernel::RBF, 1000);
+        $classifier->train($randomSplit->getTrainSamples(), $randomSplit->getTrainLabels());
+
+        $predictedLabels = $classifier->predict($randomSplit->getTestSamples());
+
+        $accuracy = Accuracy::score($randomSplit->getTestLabels(), $predictedLabels);
+        dd($accuracy);
     }
     public function naiveBayes()
     {
@@ -388,6 +423,18 @@ class AssetController extends Controller
             'mostPopular' => $mostPopular
         ]);
     }
+
+    public function tensorFlowImgPrediction()
+    {
+        //get only the files that are images
+        $imgArray = ['jpg', 'png', 'webp', 'gif', 'jpeg'];
+
+        //select the files that are in the array
+
+        $imgFiles = Asset::whereIn('filetype', $imgArray)->latest()->get();
+
+        return view('products.train.index', compact('imgFiles'));
+    }
     public function assetsPerDate()
     {
 
@@ -415,7 +462,7 @@ class AssetController extends Controller
     public function assetsCardView()
     {
 
-        $assets = Asset::select('id', 'name', 'description', 'slug', 'filesize', 'filetype', 'filetype_prediction', 'upload')->where('user_id', Auth::user()->id)->whereNull('deleted_at')->orderBy('filesize')->get();
+        $assets = Asset::where('user_id', Auth::user()->id)->whereNull('deleted_at')->latest()->get();
         return view('products.card.index', compact('assets'));
     }
     public function sharedAssets()
