@@ -62,8 +62,8 @@ class Trashed extends AbstractTable
             ->column(key: 'slug', searchable: true, sortable: true)
             ->column(key: 'filesize', searchable: true, sortable: true, label: 'FILESIZE (MB)')
             ->column(key: 'filetype', searchable: true, sortable: true)
-            ->column(key: 'created_at', searchable: true, sortable: true, as: fn ($created_at, $assets) => $created_at->diffForHumans())
-            ->column(key: 'deleted_at', searchable: true, sortable: true, as: fn ($deleted_at, $assets) => $deleted_at->diffForHumans())
+            ->column(key: 'created_at', searchable: true, sortable: true, as: fn ($created_at) => $created_at->diffForHumans())
+            ->column(key: 'deleted_at', searchable: true, sortable: true, as: fn ($deleted_at) => $deleted_at->diffForHumans())
             ->column(label: 'Actions', exportAs: false,  alignment: 'left')
             ->bulkAction(
                 label: 'Delete assets',

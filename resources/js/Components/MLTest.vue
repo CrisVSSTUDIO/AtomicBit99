@@ -1,10 +1,10 @@
 <template>
-<!-- based on  https://codepen.io/jasonmayes/pen/qBEJxgg -->
+  <!-- based on  https://codepen.io/jasonmayes/pen/qBEJxgg -->
   <component is="style">
 
 
 
-     .classifyOnClick {
+    .classifyOnClick {
     position: relative;
     float: left;
     margin: 2% 1%;
@@ -41,12 +41,12 @@
     </div>
     <section class="py-16" ref="demosSection" v-if="showBtn">
       <div class="w-screen mx-auto px-4 md:px-8">
-        
+
         <ul class=" grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <li v-for="file in imgFiles" :key="file.id" class="classifyOnClick">
             <div class="flex items-start justify-between p-4">
               <div class="space-y-2">
-                <img :src="'http://127.0.0.1:8000/storage/' + file.upload" @click="handleClick" class="shadow-md"/>
+                <img :src="'http://127.0.0.1:8000/storage/' + file.upload" @click="handleClick" class="shadow-md" />
 
               </div>
 

@@ -1,50 +1,50 @@
 <x-app-layout>
-        <section class="assets ">
+    <section class="assets ">
 
-            <!-- Your content here -->
-            <x-slot name="header">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Assets') }}
-                </h2>
-            </x-slot>
+        <!-- Your content here -->
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Assets') }}
+            </h2>
+        </x-slot>
 
-            <x-splade-flash>
-                <p v-if="flash.has('message')" v-text="flash.message" />
-            </x-splade-flash>
-            <x-header-section title="My files">
-              <a href="{{ route('naive-bayes') }}"
-                    class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
-                    rel="nofollow">
-                    <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                            fill="currentColor" class="bi bi-signpost-split" viewBox="0 0 16 16">
-                            <path
-                                d="M7 7V1.414a1 1 0 0 1 2 0V2h5a1 1 0 0 1 .8.4l.975 1.3a.5.5 0 0 1 0 .6L14.8 5.6a1 1 0 0 1-.8.4H9v10H7v-5H2a1 1 0 0 1-.8-.4L.225 9.3a.5.5 0 0 1 0-.6L1.2 7.4A1 1 0 0 1 2 7zm1 3V8H2l-.75 1L2 10zm0-5h6l.75-1L14 3H8z" />
-                        </svg></div>Classify files
-                </a>
-                <x-splade-form blob action="{{ route('download-all') }}" method="get" confirm="Download all files?"
-                    confirm-text="Are you sure you want to download ALL of your files?"
-                    confirm-button="Yes, even though it will take a massive load!" cancel-button="No, I'm scared!">
-                    @csrf
-                    {{-- <p v-if="form.processing">Submitting the data...</p> --}}
-                    <button type="submit"
-                        class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-yellow-200 active:bg-yellow-400 duration-150"><svg
-                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-download" viewBox="0 0 16 16">
-                            <path
-                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
-                            <path
-                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
-                        </svg>Download all files</button>
-                </x-splade-form>
-                <Link modal href="{{ route('assets.create') }}"
-                    class="px-4 py-1 p-2 bg-green-500 rounded-md text-white shadow-xl hover:bg-green-400">
-                <span class="text-md font-semibold">+ Add files</span></Link>
-            </x-header-section>
+        <x-splade-flash>
+            <p v-if="flash.has('message')" v-text="flash.message" />
+        </x-splade-flash>
+        <x-header-section title="My files">
+            <a href="{{ route('naive-bayes') }}"
+                class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
+                rel="nofollow">
+                <div class="text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-signpost-split" viewBox="0 0 16 16">
+                        <path
+                            d="M7 7V1.414a1 1 0 0 1 2 0V2h5a1 1 0 0 1 .8.4l.975 1.3a.5.5 0 0 1 0 .6L14.8 5.6a1 1 0 0 1-.8.4H9v10H7v-5H2a1 1 0 0 1-.8-.4L.225 9.3a.5.5 0 0 1 0-.6L1.2 7.4A1 1 0 0 1 2 7zm1 3V8H2l-.75 1L2 10zm0-5h6l.75-1L14 3H8z" />
+                    </svg></div>Classify files
+            </a>
+            <x-splade-form blob action="{{ route('download-all') }}" method="get" confirm="Download all files?"
+                confirm-text="Are you sure you want to download ALL of your files?"
+                confirm-button="Yes, even though it will take a massive load!" cancel-button="No, I'm scared!">
+                @csrf
+                {{-- <p v-if="form.processing">Submitting the data...</p> --}}
+                <button type="submit"
+                    class="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-yellow-200 active:bg-yellow-400 duration-150"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-download" viewBox="0 0 16 16">
+                        <path
+                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                        <path
+                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                    </svg>Download all files</button>
+            </x-splade-form>
+            <Link modal href="{{ route('assets.create') }}"
+                class="px-4 py-1 p-2 bg-green-500 rounded-md text-white shadow-xl hover:bg-green-400">
+            <span class="text-md font-semibold">+ Add files</span></Link>
+        </x-header-section>
 
 
-            <div class=" p-4">
-                {{-- <x-splade-lazy>
-                    <x-slot:placeholder> The items are loading... </x-slot:placeholder> --}}
+        <div class=" p-4">
+            <x-splade-lazy>
+                <x-slot:placeholder> The items are loading... </x-slot:placeholder>
                 <x-splade-table :for="$assets">
 
                     <x-splade-cell upload>
@@ -116,8 +116,8 @@
                     </x-splade-cell>
 
                 </x-splade-table>
-                {{-- </x-splade-lazy> --}}
-            </div>
+            </x-splade-lazy>
+        </div>
 
-        </section>
+    </section>
 </x-app-layout>

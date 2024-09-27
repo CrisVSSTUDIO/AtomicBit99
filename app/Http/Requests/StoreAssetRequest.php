@@ -26,9 +26,8 @@ class StoreAssetRequest extends FormRequest
             //
             'name' => 'sometimes|max:255|unique:assets',
             'description' => 'sometimes',
-            'upload.*' => 'required|file|mimetypes:image/jpeg,image/png,image/gif,image/svg+xml,gltf,application/vnd.rar,image/webp,image/avif,application/pdf,model/gltf-binary,  application/zip,
-                  application/x-zip,
-                  application/x-zip-compressed,text/csv,model/x.stl-binary',
+            'upload.*' => 'required|file|mimetypes:image/*,application/pdf,model/gltf-binary,  application/zip,
+                text/csv,model/x.stl-binary',
         ];
     }
 }

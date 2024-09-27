@@ -60,6 +60,7 @@ class Assets extends AbstractTable
         $table
             ->defaultSort('name')
             ->rowLink(function (Asset $asset) {
+                
                 return route('assets.show', $asset);
             })
             ->column(label: 'Upload', exportAs: false)
@@ -69,9 +70,9 @@ class Assets extends AbstractTable
             ->column(key: 'filesize', searchable: true, sortable: true, label: 'FILESIZE (MB)', hidden: true)
             ->column(key: 'filetype', searchable: true, sortable: true)
             ->column(label: 'Predicted', key: 'filetype_prediction', searchable: true, sortable: true)
-            ->column(key: 'created_at', searchable: true, sortable: true, as: fn ($created_at, $assets) => $created_at->diffForHumans())
-            ->column(key: 'updated_at', searchable: true, sortable: true, as: fn ($updated_at, $assets) => $updated_at->diffForHumans())
-            ->column(label: 'Actions', exportAs: false, alignment: 'left', hidden: true)
+            ->column(key: 'created_at', searchable: true, sortable: true, as: fn ($created_at) => $created_at->diffForHumans())
+            ->column(key: 'updated_at', searchable: true, sortable: true, as: fn ($updated_at) => $updated_at->diffForHumans())
+            ->column(label: 'Actions', exportAs: false, alignment: 'center', hidden: true)
             ->column(label: 'Download', exportAs: false, hidden: false)
             ->bulkAction(
                 label: 'Delete assets',
@@ -80,34 +81,32 @@ class Assets extends AbstractTable
                 after: fn () => Toast::info('Assets sent to the recycle center!'),
                 confirm: true
             )
-            // ->bulkAction(
-            //     label: 'Share with...',
-            //     before: function (array $selectedIds) {
-            //         $files = Asset::whereIn('id', $selectedIds)->pluck('upload');
-            //         $zipFile = 'files.zip';
+            ->bulkAction(
+                label: 'Download assets',
+                each: function ($assets) {
+                    $assets = Asset::pluck('upload');
+                    $zipFile = 'files.zip';
 
-            //         $zip = new ZipArchive();
-            //         if ($zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== TRUE) {
-            //             throw new Exception("Cannot open $zipFile");
-            //         }
+                    $zip = new ZipArchive();
+                    if ($zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== TRUE) {
+                        throw new Exception("Cannot open $zipFile");
+                    }
 
-            //         foreach ($files as $file) {
-            //             $filePath = storage_path("app/$file");
-            //             if (!Storage::exists($file)) {
-            //                 $zip->close();
-            //                 throw new \Exception("File does not exist: $filePath");
-            //             }
-            //             $zip->addFile($filePath, basename($file));
-            //         }
+                    foreach ($assets as $file) {
+                        $filePath = storage_path("app/$file");
+                        $zip->addFile($filePath, basename($file));
+                    }
 
-            //         $zip->close();
-            //         return response()->download($zipFile)->deleteFileAfterSend(true);
-            //     },
-            //     after: fn () => Toast::info('I have a package for you...'),
-            // )
+                    $zip->close();
+                    return response()->download($zipFile)->deleteFileAfterSend(true);
+                },
+                before: fn () => info('Preparing assets for download'),
+                after: fn () => Toast::info('Assets downloaded successfully!'),
+                confirm: true
+            )
+
             ->withGlobalSearch(columns: ['name'])
             ->export()
-            ->paginate(8)
             ->hidePaginationWhenResourceContainsOnePage();
     }
 }

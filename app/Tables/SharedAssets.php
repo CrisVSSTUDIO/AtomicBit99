@@ -17,9 +17,7 @@ class SharedAssets extends AbstractTable
      *
      * @return void
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Determine if the user is authorized to perform bulk actions and exports.
@@ -38,9 +36,9 @@ class SharedAssets extends AbstractTable
      */
     public function for()
     {
-        $sharedAssets = Asset::with('users')->whereHas('users', function ($q) {
-            $q->select('name', 'email')->where('user_id', Auth::user()->id);
-        });
+        $sharedAssets = Asset::whereHas('users', function ($q) {
+            $q->select('name', 'email')->where('user_id', Auth::id());
+        })->join('users', 'assets.user_id', '=', 'users.id')->select('assets.*', 'users.name AS username', 'users.email');
         return $sharedAssets;
     }
 
@@ -64,11 +62,14 @@ class SharedAssets extends AbstractTable
             ->column(key: 'slug', searchable: true, sortable: true, hidden: true,)
             ->column(key: 'filesize', searchable: true, sortable: true, label: 'FILESIZE (MB)', hidden: true)
             ->column(key: 'filetype', searchable: true, sortable: true)
-            ->column(label:'Predicted', key: 'filetype_prediction', searchable: true, sortable: true)
-            ->column(key: 'created_at', searchable: true, sortable: true, as: fn ($created_at, $sharedAssets) => $created_at->diffForHumans())
-            ->column(key: 'updated_at', searchable: true, sortable: true, as: fn ($updated_at, $sharedAssets) => $updated_at->diffForHumans())
+            ->column(label: 'Predicted', key: 'filetype_prediction', searchable: true, sortable: true)
+            ->column(key: 'created_at', searchable: true, sortable: true, as: fn($created_at, $sharedAssets) => $created_at->diffForHumans())
+            ->column(key: 'updated_at', searchable: true, sortable: true, as: fn($updated_at, $sharedAssets) => $updated_at->diffForHumans())
             // ->column(label: 'Actions', exportAs: false, alignment: 'left', hidden: true)
             ->column(label: 'Download', exportAs: false, hidden: true)
+            ->column(key: 'users.email', searchable: true, sortable: true,label: 'Shared by...')
+            ->column(key: 'username', searchable: true, sortable: true, label:'Shared by...')
+
             // ->bulkAction(
             //     label: 'Delete assets',
             //     each: fn ($assets) => $assets->delete(),

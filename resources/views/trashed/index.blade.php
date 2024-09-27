@@ -1,5 +1,4 @@
 <x-app-layout>
-    <x-assest-side-bar-layout>
 
         <section class="assets trashed">
             <x-header-section title="Trashed assets" >
@@ -31,5 +30,4 @@
             </div>
         </div>
     </section>
-    </x-assest-side-bar-layout>
 </x-app-layout>

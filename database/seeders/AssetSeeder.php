@@ -17,7 +17,7 @@ class AssetSeeder extends Seeder
     {
         //
         $letters = 'abcdefghijklmnopqrstuvwxyz';
-        for ($i = 0; $i <= 640; $i++) {
+        for ($i = 0; $i <= 6000040; $i++) {
             DB::table('assets')->insert([
                 'name' => substr(str_shuffle($letters), 0, 10),
                 'slug' => substr(str_shuffle($letters), 0, 10),
@@ -26,8 +26,8 @@ class AssetSeeder extends Seeder
                 'filetype' => 'jpeg',
                 'filesize' => 0.000342,
                 'user_id' => 1,
-                'created_at' => Carbon::parse('2026-01-01'),
-                'updated_at' => Carbon::parse('2026-01-01'),
+                'created_at' => Carbon::parse('2027-01-01'),
+                'updated_at' => Carbon::parse('2027-01-01'),
                 'deleted_at'=>NULL
             ]);
         }

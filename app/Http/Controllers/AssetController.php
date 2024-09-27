@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Mail;
 use Phpml\Classification\NaiveBayes;
 use ProtoneMedia\Splade\SpladeTable;
 use Phpml\Tokenization\WordTokenizer;
+use Phpml\Classification\DecisionTree;
 use Phpml\Metric\ClassificationReport;
 use Phpml\SupportVectorMachine\Kernel;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -46,12 +47,18 @@ use Phpml\FeatureSelection\SelectKBest;
 use App\Http\Requests\StoreAssetRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\UpdateAssetRequest;
+use Phpml\Classification\Ensemble\AdaBoost;
 use Phpml\Classification\KNearestNeighbors;
+use Phpml\Classification\Linear\Perceptron;
 use Phpml\Tokenization\WhitespaceTokenizer;
+use Phpml\Classification\WeightedClassifier;
 use Phpml\FeatureExtraction\TfIdfTransformer;
+use Phpml\Classification\Linear\DecisionStump;
+use Phpml\Classification\Ensemble\RandomForest;
 use Phpml\CrossValidation\StratifiedRandomSplit;
 use Phpml\FeatureExtraction\TokenCountVectorizer;
 use ProtoneMedia\Splade\FileUploads\ExistingFile;
+use Phpml\Classification\Linear\LogisticRegression;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AssetController extends Controller
@@ -66,12 +73,10 @@ class AssetController extends Controller
     }
     public function index()
     {
-
         return view('products.index', [
             'assets' => Assets::class,
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -79,7 +84,6 @@ class AssetController extends Controller
     {
         return view('products.create');
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -99,7 +103,6 @@ class AssetController extends Controller
 
             ]);
         });
-
         Toast::title('Asset uploaded!')->autoDismiss(8);
         return back();
     }
@@ -108,10 +111,6 @@ class AssetController extends Controller
      */
     public function show(Asset $asset)
     {
-        //
-        /*   $asset = $asset->load('tags');
-        $tags = Tag::select('id', 'tag_name')->get(); */
-
         //show related products
         $this->authorize('view', $asset);
         $users = User::select('id', 'name')->get();
@@ -135,9 +134,9 @@ class AssetController extends Controller
     {
         //
         $request->validated();
-        if ($request->has('tags')) {
-            $asset->tags()->sync($request->tags);
-        }
+        // if ($request->has('tags')) {
+        //     $asset->tags()->sync($request->tags);
+        // }
 
         $asset->update([
             'name' => $request->get('name'),
@@ -164,14 +163,14 @@ class AssetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function restore($id)
-    {
-        $asset = Asset::onlyTrashed()->findOrFail($id);
-        $asset->restore();
-        Toast::title('Asset restored!')->autoDismiss(8);
+    // public function restore($id)
+    // {
+    //     $asset = Asset::onlyTrashed()->findOrFail($id);
+    //     $asset->restore();
+    //     Toast::title('Asset restored!')->autoDismiss(8);
 
-        return back();
-    }
+    //     return back();
+    // }
     public function downloadAll()
     {
         $files = Asset::pluck('upload');
@@ -194,30 +193,31 @@ class AssetController extends Controller
         $zip->close();
         return response()->download($zipFile)->deleteFileAfterSend(true);
     }
-    public function forceDelete($id)
-    {
-        $asset = Asset::onlyTrashed()->findOrFail($id);
-        if ($asset->upload) {
-            Storage::delete($asset->upload);
-        }
-        $asset->tags()->detach();
-        $asset->forceDelete();
-        Toast::title('Asset yeeted!')
-            ->autoDismiss(8);
-        return back();
-    }
-    public function destroy(Asset $asset)
-    {
-        //
-        $asset->delete();
-        Toast::title('Asset sent to the recycle center!')->autoDismiss(8);
+    // public function forceDelete($id)
+    // {
+    //     $asset = Asset::onlyTrashed()->findOrFail($id);
+    //     if ($asset->upload) {
+    //         Storage::delete($asset->upload);
+    //     }
+    //     $asset->users()->detach();
+    //     $asset->forceDelete();
+    //     Toast::title('Asset yeeted!')
+    //         ->autoDismiss(8);
+    //     return back();
+    // }
+    // public function destroy(Asset $asset)
+    // {
+    //     //
+    //     $asset->delete();
+    //     Toast::title('Asset sent to the recycle center!')->autoDismiss(8);
 
-        return redirect('assets.index');
-    }
+    //     return redirect('assets.index');
+    // }
     public function downloadFile(Asset $asset)
     {
         $file = Asset::where('id', $asset->id)->value('upload');
         if (Storage::exists($file)) {
+
             return Storage::download($file);
         } else {
             return redirect('assets.index');
@@ -281,7 +281,6 @@ class AssetController extends Controller
                 ->where('user_id', Auth::user()->id)
                 ->whereNull('deleted_at')
                 ->orderBy('filesize')
-                ->take(500)
                 ->get();
             // Check if files collection is not empty
             if ($files->isEmpty()) {
@@ -302,14 +301,13 @@ class AssetController extends Controller
             $split = new StratifiedRandomSplit($dataset);
 
             // Create and Test the Naive Bayes classifier
-            $classifier = new NaiveBayes();
+            $classifier = new DecisionTree();
             $classifier->train($split->getTrainSamples(), $split->getTrainLabels());
 
             // Predict file types for test samples
             $predictions = $classifier->predict($samples);
             $classificationRport = new ClassificationReport($labels, $predictions);
             $accuracy = Accuracy::score($labels, $predictions);
-
             // Update database records with predictions
             foreach ($predictions as $index => $prediction) {
                 DB::table('assets')
@@ -440,9 +438,9 @@ class AssetController extends Controller
 
         $prevNextFiveYears = Date('Y') + 5;
         $multi_array = array();
-        $productsCount = Asset::selectRaw('EXTRACT(YEAR FROM created_at) AS date, COUNT(*) AS count')
-            ->groupBy('date')
-            ->take(500)->get();
+        $productsCount = Asset::selectRaw("strftime('%Y', created_at) AS date, COUNT(*) AS count")
+        ->groupBy('date')
+        ->take(500)->get();
         if (count($productsCount)) {
             foreach ($productsCount as $productPerYear) {
                 $perYear[] = $productPerYear->date;

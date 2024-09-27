@@ -25,8 +25,6 @@ class Asset extends Model
         'use_prediction'
     ];
 
-
-
     public function users()
 
     {

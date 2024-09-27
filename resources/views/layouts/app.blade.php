@@ -12,7 +12,7 @@
     <!-- Page Content -->
     <main>
         <div id="app"
-           class="max-w-screen  mx-auto z-10">
+           class="max-w-screen  mx-auto a z-10">
             {{ $slot }}
         </div>
     </main>

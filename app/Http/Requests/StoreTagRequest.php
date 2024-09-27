@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTagRequest extends FormRequest
@@ -12,7 +11,7 @@ class StoreTagRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return false;
     }
 
     /**
@@ -23,15 +22,7 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-
-            'tag_name' => 'required|unique:tags|max:255',
-
-
-
-            'tag_name.required' => 'O nome da tag é obrigatório.',
-
-
+            //
         ];
     }
 }

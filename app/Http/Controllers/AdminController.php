@@ -15,9 +15,10 @@ class AdminController extends Controller implements HasMiddleware
             // examples with aliases, pipe-separated names, guards, etc:
             /*             'role_or_permission:manager|edit articles',
  */
-                 new Middleware(\Spatie\Permission\Middleware\RoleMiddleware::using('Super Admin'), except: ['show']),
-/*             new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('delete records,api'), only: ['destroy']), 
- */        ];
+            new Middleware(\Spatie\Permission\Middleware\RoleMiddleware::using('Super Admin'), except: ['show']),
+            /*             new Middleware(\Spatie\Permission\Middleware\PermissionMiddleware::using('delete records,api'), only: ['destroy']), 
+ */
+        ];
     }
     public function index()
     {

@@ -2,14 +2,14 @@
 
 namespace App\Tables;
 
-use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\SpladeTable;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 
-class Categories extends AbstractTable
+class Users extends AbstractTable
 {
     /**
      * Create a new instance.
@@ -38,7 +38,8 @@ class Categories extends AbstractTable
      */
     public function for()
     {
-        return Category::where('user_id', '=', Auth::user()->id);
+        $users = User::with('roles');
+        return $users;
     }
 
     /**
@@ -50,25 +51,21 @@ class Categories extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['id'])
-            ->defaultSort('id')
-            ->column(key: 'category_name', searchable: true, sortable: true)
-            ->column(key: 'category_description', searchable: true, sortable: true)
-            ->column(label: 'Actions')
+            ->defaultSort('name')
+            ->rowLink(function (User $user) {
+                return route('users.show', $user);
+            })
+            ->column(key: 'name', searchable: true, sortable: true)
+            ->column(key: 'email', searchable: true, sortable: true)
             ->bulkAction(
-                label: 'Delete categories',
-                each: fn ($categories) => $categories->delete(),
-                before: fn () => info('Deleting categories'),
-                after: fn () => Toast::info('Categories deleted'),
+                label: 'Delete users',
+                each: fn($users) => $users->delete(),
+                before: fn() => info('Deleting users'),
+                after: fn() => Toast::info('users sent to the recycle center!'),
                 confirm: true
-
             )
-            ->paginate(5);
-        // ->searchInput()
-        // ->selectFilter()
-        // ->withGlobalSearch()
-
-        // ->bulkAction()
-        // ->export()
+            ->withGlobalSearch(columns: ['name'])
+            ->export()
+            ->hidePaginationWhenResourceContainsOnePage();
     }
 }

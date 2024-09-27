@@ -28,9 +28,8 @@ class UpdateAssetRequest extends FormRequest
             //
             'name' => 'required|max:255',
             'description' => 'sometimes',
-            'upload' => 'sometimes|nullable|file|mimetypes:image/jpeg,image/png,image/gif,image/svg+xml,gltf,application/vnd.rar,image/webp,image/avif,application/pdf,model/gltf-binary,  application/zip,
-                  application/x-zip,
-                  application/x-zip-compressed,text/csv,model/x.stl-binary',
+            'upload' => 'sometimes|nullable|file|mimetypes:image/*,application/pdf,model/gltf-binary,  application/zip,
+                text/csv,model/x.stl-binary',
             /*    'tags' => 'sometimes|max:4|unique:asset_tag,tag_id,NULL,id,asset_id,' . $this->id, */
 
 

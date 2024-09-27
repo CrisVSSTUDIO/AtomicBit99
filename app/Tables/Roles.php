@@ -2,12 +2,12 @@
 
 namespace App\Tables;
 
-use App\Models\Tag;
 use Illuminate\Http\Request;
-use ProtoneMedia\Splade\AbstractTable;
+use Spatie\Permission\Models\Role;
 use ProtoneMedia\Splade\SpladeTable;
+use ProtoneMedia\Splade\AbstractTable;
 
-class Tags extends AbstractTable
+class Roles extends AbstractTable
 {
     /**
      * Create a new instance.
@@ -36,7 +36,7 @@ class Tags extends AbstractTable
      */
     public function for()
     {
-        return Tag::query();
+        return Role::query();
     }
 
     /**

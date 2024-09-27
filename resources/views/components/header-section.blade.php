@@ -5,7 +5,7 @@
             <h3 class="text-gray-800 text-2xl font-bold break-words">
                 {{ $title }} </h3>
         </div>
-        <div class="flex items-center flex-wrap space-x-4 mt-6 md:mt-0 ">
+        <div class="flex items-start sm:items-center flex-wrap flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 mt-6 md:mt-0 ">
             {{ $slot }}
 
         </div>

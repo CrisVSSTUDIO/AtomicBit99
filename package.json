@@ -12,7 +12,7 @@
         "@tailwindcss/typography": "^0.5.10",
         "@vitejs/plugin-vue": "^5.0",
         "autoprefixer": "^10.4.16",
-        "axios": "^1.6.4",
+        "axios": "^1.7.4",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.32",
         "tailwindcss": "^3.4",
@@ -21,6 +21,9 @@
     },
     "dependencies": {
         "@google/model-viewer": "^3.5.0",
+        "@tensorflow-models/coco-ssd": "^2.2.3",
+        "@tensorflow/tfjs-backend-cpu": "^4.20.0",
+        "@tensorflow/tfjs-backend-webgl": "^4.20.0",
         "@tsparticles/slim": "^3.4.0",
         "@tsparticles/vue3": "^3.0.1",
         "apexcharts": "^3.49.1",
